@@ -22,7 +22,7 @@ DateTime::TimeZone::Alias - Create aliases for DateTime timezones
 
     DateTime::TimeZone::Alias->is_defined( 'Hawaii' )
     DateTime::TimeZone::Alias->is_alias( 'EST' )
-    DateTime::TimeZone::Alias->is_timezone( 'Antarctica/Vostok')
+    DateTime::TimeZone::Alias->is_timezone( 'Antarctica/Vostok' )
 
     or
 
@@ -128,8 +128,8 @@ It's important to remember that aliases are global in scope. E.g.
 
     sub bar {
         DateTime::TimeZone::Alias->set( EST => 'US/Eastern' );
-        .             
-	.
+        .
+        .
 
         DateTime::TimeZone::Alias->remove( qw( EST ) );
     }
@@ -142,8 +142,8 @@ thread safe.  E.g.
     sub bar {
         my $my_alias = %{ DateTime::TimeZone::Alias->aliases }->{ EST };
         DateTime::TimeZone::Alias->set( EST => 'US/Eastern' );
-	.
-	.
+        .
+        .
 
         DateTime::TimeZone::Alias->set( EST => $my_alias );
     }
