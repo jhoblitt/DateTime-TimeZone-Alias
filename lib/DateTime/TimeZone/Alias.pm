@@ -19,7 +19,7 @@ sub import {
 sub set {
 	my $class = shift;
 
-	return unless @_;
+	croak "Can't be called without any parameters" unless @_;
 
 	my %p = @_;
 
@@ -38,7 +38,7 @@ sub set {
 sub add {
 	my $class = shift;
 
-	return unless @_;
+	croak "Can't be called without any parameters" unless @_;
 
 	my %p = @_;
 
