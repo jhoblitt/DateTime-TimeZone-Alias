@@ -11,3 +11,4 @@ t/02_import.t
 t/03_set.t
 t/04_del.t
 Makefile.PL
+META.yml
