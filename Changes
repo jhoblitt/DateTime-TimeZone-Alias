@@ -1,5 +1,8 @@
 Revision history for Perl module DateTime::TimeZone::Alias
 
+0.02 Thu Jun 12 17:06:13 HST 2003
+	- fixed the del/remove test, thanks to Ben Bennett for catching this
+
 0.01 Thu Jun 12 10:19:39 HST 2003
 	- renamed del to remove
 

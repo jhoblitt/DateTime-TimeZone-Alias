@@ -1,3 +1,6 @@
 TODO list for Perl module DateTime::TimeZone::Alias
 
-- Support aliasing entries in the LINKS hash
+- Aliasing Aliases
+- Check to see the TZ actually exists
+- A method that checks to see if an Alias or TZ already exists
+- A method that lists existing aliases (and TZs?)
