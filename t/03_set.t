@@ -1,4 +1,4 @@
-use Test::More tests => 4;
+use Test::More tests => 5;
 
 use strict;
 
@@ -26,4 +26,9 @@ DateTime::TimeZone::Alias->set( Lagos => 'Africa/Lagos', Qatar => 'Asia/Qatar' )
 {
 	eval { DateTime::TimeZone::Alias->set( foo => 'bar' ) };
 	like( $@, qr/Aliases must point to a valid timezone/ );
+}
+
+{
+	eval { DateTime::TimeZone::Alias->set() };
+	like( $@, qr/Can't be called without any parameters/ );
 }

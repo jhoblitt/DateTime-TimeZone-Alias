@@ -1,4 +1,4 @@
-use Test::More tests => 6;
+use Test::More tests => 7;
 
 use strict;
 
@@ -36,3 +36,9 @@ use DateTime::TimeZone::Alias 'Pacific/Auckland' => 'Pacific/Apia';
 	my $dttz = $dt->time_zone();
 	isa_ok( $dttz, 'DateTime::TimeZone::Pacific::Auckland' );
 }
+
+{
+	eval { DateTime::TimeZone::Alias->add() };
+	like( $@, qr/Can't be called without any parameters/ );
+}
+
