@@ -5,7 +5,9 @@ use strict;
 use DateTime;
 use DateTime::TimeZone;
 
+# passing a hash to import
 use DateTime::TimeZone::Alias HIST => 'Pacific/Honolulu', EST => 'Australia/Melbourne';
+
 {
 	my $dt = DateTime->now( time_zone => 'HIST' );
 	isa_ok( $dt, 'DateTime' );
@@ -19,7 +21,9 @@ use DateTime::TimeZone::Alias HIST => 'Pacific/Honolulu', EST => 'Australia/Melb
 	isa_ok( $dttz, 'DateTime::TimeZone::Australia::Melbourne' );
 }
 
+# multiple imports
 use DateTime::TimeZone::Alias York => 'America/New_York';
+
 {
 	my $dttz = DateTime::TimeZone->new( name => 'York' );
 	isa_ok( $dttz, 'DateTime::TimeZone::America::New_York' );
