@@ -13,7 +13,6 @@ sub import {
 	return unless @_;
 
 	$class->set( @_ );
-
 }
 
 sub set {
@@ -28,7 +27,7 @@ sub set {
 	}
 }
 
-sub del {
+sub remove {
 	my $class = shift;
 
 	return unless @_;

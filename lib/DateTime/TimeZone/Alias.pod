@@ -13,7 +13,7 @@ DateTime::TimeZone::Alias - Create aliases for DateTime timezones
 
     or
 
-    DateTime::TimeZone::Alias->del( Hawaii, EST, Pain );
+    DateTime::TimeZone::Alias->remove( Hawaii, EST, Pain );
 
 =head1 DESCRIPTION
 
@@ -32,7 +32,7 @@ Accepts a hash representing an alias and the timezone it should represent.
 
 Accepts a hash representing an alias and the timezone it should represent.
 
-=item * del( alias, ... )
+=item * remove( alias, ... )
 
 Accepts a list of aliases to be deleted.
 
