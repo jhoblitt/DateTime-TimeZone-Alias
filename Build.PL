@@ -4,6 +4,7 @@ my $build = new Module::Build
 		module_name		=> 'DateTime::TimeZone::Alias',
 		dist_version_from	=> 'lib/DateTime/TimeZone/Alias.pm',
 		author			=> 'Joshua Hoblitt <jhoblitt@cpan.org>',
+		sign			=> 1,
 		license			=> 'perl',
 		requires		=> {
 			DateTime		=> 0,
