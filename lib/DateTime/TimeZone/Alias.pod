@@ -1,28 +1,43 @@
+=pod
+
 =head1 NAME
 
 DateTime::TimeZone::Alias - Create aliases for DateTime timezones
 
 =head1 SYNOPSIS
- 
+
     use DateTime::TimeZone::Alias Hawaii => 'Pacific/Honolulu',
                                   EST => 'Australia/Melbourne';
 
     or
 
     DateTime::TimeZone::Alias->set( Pain => 'America/Dawson_Creek', %hash );
+    DateTime::TimeZone::Alias->add( Fun => 'America/Tijuana', %hash );
 
     or
 
-    DateTime::TimeZone::Alias->remove( Hawaii, EST, Pain );
+    DateTime::TimeZone::Alias->remove( qw( Hawaii EST Pain Fun ) );
+
+    or
+
+    DateTime::TimeZone::Alias->is_defined( 'Hawaii' )
+    DateTime::TimeZone::Alias->is_alias( 'EST' )
+    DateTime::TimeZone::Alias->is_timezone( 'Antarctica/Vostok')
+
+    or
+
+    DateTime::TimeZone::Alias->aliases
+    DateTime::TimeZone::Alias->timezones
 
 =head1 DESCRIPTION
 
-Creates and deletes aliases for DateTime timezones.  This module violates 
+Creates and destroys aliases for DateTime timezones.  This module violates 
 the encapsulation of the DateTime internals.  User _Beware_.
 
 =head1 IMPORT PARAMETERS
 
-Accepts a hash representing an alias and the timezone it should represent.
+Accepts a hash representing an alias and the timezone it should map too.
+Import has the exact same behaviors as the C<set> method.
 
 =head1 METHODS
 
@@ -30,19 +45,123 @@ Accepts a hash representing an alias and the timezone it should represent.
 
 =item * set( alias => timezone, ... ) 
 
-Accepts a hash representing an alias and the timezone it should represent.
+Accepts a hash representing an alias and the timezone it should map too.
+If an invalid timezone value is passed an exception is thrown.
+It is possible to create an alias to another alias.  This method will
+redefined an existing alias or add a new alias that overrides an existing
+timezone.
+
+=item * add( alias => timezone, ... ) 
+
+Accepts a hash representing an alias and the timezone it should map too.
+If an invalid timezone value is passed an exception is thrown.
+It is possible to create an alias to another alias.
+This method will _not_ redefined an existing alias or allow you remap a
+timezone.  For redefinitions see the C<set> method.
 
 =item * remove( alias, ... )
 
-Accepts a list of aliases to be deleted.
+Accepts a list of aliases to be removed.  If an the name of an aliases that
+doesn't exist is passed in then an exception is thrown.  It's important to 
+note that you can remove aliases but not timezones.  However, a redefined timezone
+is actually an alias and can be removed.
+
+=item * is_defined( $str )
+
+If $str is a known timezone or alias this method returns 1, otherwise undef is returned. 
+
+=item * is_alias( $str )
+
+If $str is a known alias this method returns 1, otherwise undef is returned. 
+
+=item * is_timezone( $str )
+
+If $str is a known timezone this method returns 1, otherwise undef is returned. 
+
+=item * aliases
+
+In list context a hash of all known aliases and their values is returned.
+In scalar context a reference to a hash is returned.
+
+=item * timezones
+
+In list context an array of all known timezones is returned.
+In scalar context a reference to an array is returned.
+
+=back
 
 =head1 GOTCHAS
 
-Multiple C<use DateTime::TimeZone::Alias> in the same package may not have
-the desired result if attempting to redefine existing aliases.  Use the set
-method instead.
+=head3 Import
+
+Multiple C<use DateTime::TimeZone::Alias> statements in the same package may
+not have the desired result if attempting to redefine existing aliases.  If
+you want to redefine an alias use the C<set> method instead.
+
+=head3 Aliasing
+
+You can _not_ create circular aliases.  E.g.
+
+    # TSH actually points to value of HST - 'Pacific/Honolulu'
+    # if HST wasn't already defined this would be an exception
+    DateTime::TimeZone::Alias->set( TSH => HST );
+
+    # HST still points to 'Pacific/Honolulu'
+    DateTime::TimeZone::Alias->set( HST => TSH );
+
+Sorry - no evil here, move along.
+
+=head3 Global Behavior
+
+It's important to remember that aliases are global in scope. E.g.
+
+    package Foo;
+
+    DateTime::TimeZone::Alias->set( EST => 'US/Eastern' );
+
+    Bar->bar();
+
+    # this will fail because EST is no longer defined
+    my $dt = DateTime->now( time_zone => 'EST' );
+
+    package Bar;
+
+    sub bar {
+        DateTime::TimeZone::Alias->set( EST => 'US/Eastern' );
+        .             
+	.
+
+        DateTime::TimeZone::Alias->remove( qw( EST ) );
+    }
+
+There are many possible ways to avoid this trap.  The best solution is to
+simply not write code like this.  If you insist on this style then you can try
+to store/restore the value of the of the alias.  Of course thats probably not
+thread safe.  E.g.
+
+    sub bar {
+        my $my_alias = %{ DateTime::TimeZone::Alias->aliases }->{ EST };
+        DateTime::TimeZone::Alias->set( EST => 'US/Eastern' );
+	.
+	.
+
+        DateTime::TimeZone::Alias->set( EST => $my_alias );
+    }
+
+If C<$my_alias> is undefined then the C<set> will fail as an alias must point to a
+valid timezone.
+
+=head1 DEVELOPER NOTES
+
+The C<aliases> and C<timezones> methods preserve encapsulation by returning a
+reference to a copy of the internal data structures instead of a direct
+reference.
 
 =head1 CREDITS
+
+Ben Bennett (BBENNETT) for a bug report, some API suggestions,
+documentation suggestions, and being so darn enthusiastic.
+(not necessary in that order)
 
 Everyone at the DateTime C<Asylum>.
 
@@ -51,7 +170,7 @@ Everyone at the DateTime C<Asylum>.
 Joshua Hoblitt <jhoblitt@cpan.org>
 
 =head1 COPYRIGHT
- 
+
 Copyright (c) 2003 Joshua Hoblitt.  All rights reserved.  This program
 is free software; you can redistribute it and/or modify it under the
 same terms as Perl itself.

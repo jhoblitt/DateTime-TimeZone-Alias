@@ -1,4 +1,4 @@
-DateTime/TimeZone/Alias
+DateTime::TimeZone::Alias
 ========================
 
 This is a companion module to DateTime/TimeZone.pm. It allows you to generate aliases to timezone information.

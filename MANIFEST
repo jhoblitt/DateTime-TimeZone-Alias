@@ -10,5 +10,9 @@ t/01_load.t
 t/02_import.t
 t/03_set.t
 t/04_remove.t
+t/05_aliases.t
+t/06_add.t
+t/07_is.t
+t/08_data.t
 Makefile.PL
 META.yml
