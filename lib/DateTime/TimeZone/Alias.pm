@@ -6,7 +6,7 @@ use Carp qw( croak );
 use DateTime::TimeZoneCatalog;
 
 use vars qw( $VERSION );
-$VERSION = 0.03;
+$VERSION = 0.04;
 
 sub import {
 	my $class = shift;
