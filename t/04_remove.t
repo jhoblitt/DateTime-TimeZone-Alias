@@ -12,7 +12,7 @@ use DateTime::TimeZone::Alias;
 	my $dt = DateTime->now( time_zone => 'yap' );
 	isa_ok( $dt, 'DateTime' );
 
-	DateTime::TimeZone::Alias->del( yap => 'Pacific/Yap' );
+	DateTime::TimeZone::Alias->remove( yap => 'Pacific/Yap' );
 
 	eval { DateTime::TimeZone->new( name => 'yap' ) };
 	like( $@, qr/Invalid offset/ );
