@@ -9,6 +9,6 @@ lib/DateTime/TimeZone/Alias.pod
 t/01_load.t
 t/02_import.t
 t/03_set.t
-t/04_del.t
+t/04_remove.t
 Makefile.PL
 META.yml
