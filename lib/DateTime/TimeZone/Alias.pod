@@ -20,6 +20,10 @@ DateTime::TimeZone::Alias - Create aliases for DateTime timezones
 
     or
 
+    DateTime::TimeZone::Alias->value( 'EST' );
+
+    or
+
     DateTime::TimeZone::Alias->is_defined( 'Hawaii' )
     DateTime::TimeZone::Alias->is_alias( 'EST' )
     DateTime::TimeZone::Alias->is_timezone( 'Antarctica/Vostok' )
@@ -65,6 +69,10 @@ Accepts a list of aliases to be removed.  If an the name of an aliases that
 doesn't exist is passed in then an exception is thrown.  It's important to 
 note that you can remove aliases but not timezones.  However, a redefined timezone
 is actually an alias and can be removed.
+
+=item * value( $str )
+
+If $str is a known alias then the timezone being aliased is returned, otherwise undef.
 
 =item * is_defined( $str )
 
@@ -159,7 +167,7 @@ such as C<mod_perl>.  E.g.
 This probably isn't thread safe.  E.g.
 
     sub bar {
-        my $my_alias = %{ DateTime::TimeZone::Alias->aliases }->{ EST };
+        my $my_alias = DateTime::TimeZone::Alias->value( 'EST' );
         DateTime::TimeZone::Alias->set( EST => 'US/Eastern' );
         .
         .
