@@ -65,6 +65,16 @@ sub remove {
 	}
 }
 
+sub value {
+	my( $class, $key ) = @_;
+
+	if ( $class->is_alias( $key ) ) {
+		return $DateTime::TimeZone::LINKS{ $key };
+	} else {
+		return undef;
+	}
+}
+
 sub is_defined {
 	my( $class, $def_candidate ) = @_;
 
