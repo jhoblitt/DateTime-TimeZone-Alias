@@ -5,7 +5,7 @@ use strict;
 use DateTime::TimeZoneCatalog;
 
 use vars qw( $VERSION );
-$VERSION = 0.01;
+$VERSION = 0.02;
 
 sub import {
 	my $class = shift;
