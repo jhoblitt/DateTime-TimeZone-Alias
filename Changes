@@ -1,6 +1,6 @@
 Revision history for Perl module DateTime::TimeZone::Alias
 
-0.04
+0.04 Thu Jun 19 00:13:30 HST 2003
 	- poor man's DT::TZ::Alias added to docs
 	- value method returns the timezone of an alias
 	- add and set methods now croak without params
