@@ -9,5 +9,8 @@ use DateTime::TimeZone::Alias;
 		is( DateTime::TimeZone::Alias->value( $key ), %{ DateTime::TimeZone::LINKS }->{ $key } );
 	}
 
-	is( DateTime::TimeZone::Alias->value( 'Foo' ), undef );
+	# DT::TZ::ALL is only used as a source of non-alias (LINKS) values
+	foreach my $key ( @DateTime::TimeZone::ALL ) {
+		is( DateTime::TimeZone::Alias->value( $key ), undef );
+	}
 }
