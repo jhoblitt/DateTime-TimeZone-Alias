@@ -1,6 +1,7 @@
 Revision history for Perl module DateTime::TimeZone::Alias
 
-0.01 Wed Jun 11 14:58:26 2003
+0.01 Thu Jun 12 10:19:39 HST 2003
+	- renamed del to remove
+
+0.01pre Wed Jun 11 14:58:26 2003
 	- original version; created by ExtUtils::ModuleMaker 0.31229
-
-
