@@ -14,5 +14,6 @@ t/05_aliases.t
 t/06_add.t
 t/07_is.t
 t/08_data.t
+t/09_value.t
 Makefile.PL
 META.yml
