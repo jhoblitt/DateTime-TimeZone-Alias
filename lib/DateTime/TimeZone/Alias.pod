@@ -92,13 +92,13 @@ In scalar context a reference to an array is returned.
 
 =head1 GOTCHAS
 
-=head3 Import
+=head2 Import
 
 Multiple C<use DateTime::TimeZone::Alias> statements in the same package may
 not have the desired result if attempting to redefine existing aliases.  If
 you want to redefine an alias use the C<set> method instead.
 
-=head3 Aliasing
+=head2 Aliasing
 
 You can _not_ create circular aliases.  E.g.
 
@@ -111,7 +111,7 @@ You can _not_ create circular aliases.  E.g.
 
 Sorry - no evil here, move along.
 
-=head3 Global Behavior
+=head2 Global Behavior
 
 It's important to remember that aliases are global in scope. E.g.
 
@@ -136,8 +136,27 @@ It's important to remember that aliases are global in scope. E.g.
 
 There are many possible ways to avoid this trap.  The best solution is to
 simply not write code like this.  If you insist on this style then you can try
-to store/restore the value of the of the alias.  Of course thats probably not
-thread safe.  E.g.
+one of the suggested work arounds.
+
+=head3 Poor Man's DateTime::TimeZone::Alias
+
+Sometimes DateTime::TimeZone::Alias may not be the best solution to your
+problem.  Particularly if your in an environment that has poor C<sand-boxing>
+such as C<mod_perl>.  E.g.
+
+    use constant EST => 'US/Eastern';
+
+    or
+
+    sub EST () { 'US/Eastern' }
+    .
+    .
+
+    my $dt = DateTime->new( %params, time_zone => EST );
+
+=head3 store/restore
+
+This probably isn't thread safe.  E.g.
 
     sub bar {
         my $my_alias = %{ DateTime::TimeZone::Alias->aliases }->{ EST };
