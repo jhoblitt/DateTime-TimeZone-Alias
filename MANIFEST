@@ -1,0 +1,13 @@
+MANIFEST
+LICENSE
+README
+Todo
+Build.PL
+Changes
+lib/DateTime/TimeZone/Alias.pm
+lib/DateTime/TimeZone/Alias.pod
+t/01_load.t
+t/02_import.t
+t/03_set.t
+t/04_del.t
+Makefile.PL
