@@ -50,7 +50,7 @@ Import has the exact same behaviors as the C<set> method.
 =item * set( alias => timezone, ... ) 
 
 Accepts a hash representing an alias and the timezone it should map too.
-If an invalid timezone value is passed an exception is thrown.
+If an invalid timezone value or no parameters are passed an exception is thrown.
 It is possible to create an alias to another alias.  This method will
 redefine an existing alias or add a new alias that overrides an existing
 timezone.
@@ -58,7 +58,7 @@ timezone.
 =item * add( alias => timezone, ... ) 
 
 Accepts a hash representing an alias and the timezone it should map too.
-If an invalid timezone value is passed an exception is thrown.
+If an invalid timezone value or no parameters are passed an exception is thrown.
 It is possible to create an alias to another alias.
 This method will _not_ redefine an existing alias or allow you remap a
 timezone.  For redefinitions see the C<set> method.
