@@ -15,5 +15,6 @@ t/06_add.t
 t/07_is.t
 t/08_data.t
 t/09_value.t
+t/10_offset.t
 Makefile.PL
 META.yml
